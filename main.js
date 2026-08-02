@@ -1,256 +1,178 @@
-body{
-    color:  #705429;
-    margin: 0;
-    padding: 10px;
-    height: 100vh;
-    background: #fceecf;
-    display: grid;
-    grid-template-rows: 100px 150px 150px 1fr;
-    grid-template-areas: "cabecalho "
-                         "informacoes"
-                         "crud "
-                         "lista";
-    gap: 20px;
-    font-family: "Nunito", sans-serif;
+const entradaValor = document.getElementById('entrada');
+const btnAdicionar = document.getElementById('adicionar');
+const radioReceita = document.getElementById('tipo-receita');
+const radioDespesa = document.getElementById('tipo-despesa');
+const nomeInput = document.getElementById('nome');
+const data = document.getElementById('data');
+const corpoTabela = document.getElementById('corpo-tabela');
+const displayLucro = document.getElementById('lucro');
+const displayDespesas = document.getElementById('despesas');
+const displayTotal = document.getElementById('total');
+const displayNumTransacoes = document.getElementById('numTransacoes')
+const areaDatalist = document.getElementById('area')
+const dataList = document.getElementById('opcoes-area')
 
-   
+let transacoes = [];
+let indiceEditando = null;
+
+function atualizarResumo() {
+    let receita = 0;
+    let despesa = 0;
+    let numTransacoes = 0
+
+    for (let i = 0; i < transacoes.length; i++) {
+        let transacao = transacoes[i];
+        if (transacao.tipo === 'receita') {
+            receita += transacao.valor;
+        } else if (transacao.tipo === 'despesa') {
+            despesa += transacao.valor;
+        }
+    }
+
+    let total = receita - despesa;
+
+    displayLucro.textContent = "R$ " + receita.toFixed(2);
+    displayDespesas.textContent = "R$ " + despesa.toFixed(2);
+    displayTotal.textContent = "R$ " + total.toFixed(2);
+    displayNumTransacoes.textContent = transacoes.length
 }
 
-.cabecalho {
-    color: #F6B313;
-    padding: 5px;
-    grid-area: cabecalho;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-     
-}
-h2 {
-   color: #F6B313; 
-   font-size: 30px;
-}
-.informacoes {
-    grid-area: informacoes;
-    display: flex;
-    justify-content: space-around;
-     padding: 10px;
-}
-.crud {
-    margin: 10px;
-    border-radius: 16px;
-    grid-area: crud;
-    
-    background: #FEF9EF;
-    box-shadow: inset 0px -6px 3px rgba(175, 171, 160, 0.4),
-    1px 4px 5px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-}
-.lista {
-    margin: 5px;
-    border-radius: 16px;
-    grid-area: lista;
-    background: #FEF9EF;
-     padding: 20px;
-     box-shadow: inset 0px 6px 3px rgba(175, 171, 160, 0.4),
-    1px 4px 5px rgba(0, 0, 0, 0.15);
+function adicionarDataList() {
+    const valor = areaDatalist.value.trim();
+
+    if (valor === '') {
+        return;
+    }
+
+    const opcoes = dataList.querySelectorAll('option');
+
+    for (let i = 0; i < opcoes.length; i++) {
+        if (opcoes[i].value.toLowerCase() === valor.toLowerCase()) {
+            return;
+        }
+    }
+
+    const novaOpcao = document.createElement('option');
+    novaOpcao.value = valor;
+
+    dataList.appendChild(novaOpcao);
 }
 
-.graficos {
-    border: none;
-    border-radius: 30px;
-    width: 80px;
-    height: 80px;
-     background: #FDEFC6;
-          box-shadow:  inset 0px -4px 2px rgba(220, 180, 80, 0.4), 
-    inset 0px 2px 2px rgba(255, 255, 255, 0.3), 
-    0px 4px 5px rgba(0, 0, 0, 0.15);  
+function renderizarLista() {
+    corpoTabela.innerHTML = '';
 
-}
-
-.graficos:hover {
-    transition: all 0.3s ease;
-    transform: scale(1.2) rotate(5deg);
-}
+    for (let i = 0; i < transacoes.length; i++) {
+        let transacao = transacoes[i];
 
 
+        const tr = document.createElement('tr');
+        tr.id = `item-${i + 1}`;
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    border-top-left-radius: 16px;
-    background-color: #FEFBF3;
-    box-shadow: 
-    inset 0px -5px 2px rgba(175, 171, 160, 0.4),
-    4px -4px 8px rgba(0, 0, 0, 0.1),
-    -4px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
-}
+        let corTexto = transacao.tipo === 'receita' ? '#629148' : '#ff5040';
 
-  td, th {
-    padding-top: 10px;
-    text-align: center;
 
+        tr.innerHTML = `
+            <td>${transacao.area}</td>
+            <td>${transacao.nome}</td>
+            <td style="color: ${corTexto}; font-weight: bold;">R$ ${transacao.valor.toFixed(2).replace('.', ',')}</td>
+            <td>${transacao.data.split('/').reverse().join('/')}</td>
+            <td id="acoes-${i + 1}">
+                <button id="editar-${i + 1}" class="editar" onclick="editarTransacao(${i})"><img style="width: 25px; height: 25px;" src="/lapis.png" alt="Editar"></button>
+                <button id="remover-${i + 1}" class="remover" onclick="removerTransacao(${i})"><img style="width: 25px; height: 25px;" src="/lixeira.png" alt="Remover"></button>
+            </td>
+        `;
+
+
+        corpoTabela.appendChild(tr);
+    }
 }
 
 
-tr {
-    border-bottom: 1px solid rgba(112, 84, 41, 0.5);
-    font-weight: bold;
-    
-    font-size: 18px;
-}
-tr:hover {
-    transition: all 0.3s ease;
-    background-color: #f8edd4; 
-}
 
-th{
-   background: #FEF4D9;
-}
 
-.remover {
-    width: 60px;
-    height: 60px;
-    background: #ffdada;
-    border: none;
-    border-radius: 25px;
-    box-shadow: 
-    inset 0px -4px 2px rgba(230, 160, 160, 0.5), 
-    inset 0px 2px 2px rgba(255, 255, 255, 0.3),  
-    0px 4px 5px rgba(0, 0, 0, 0.15);    
-    
-}
+function adicionarTransacao() {
+    const valor = parseFloat(entradaValor.value);
 
-.editar{
-    margin: 10px;
-    background: #FDEFC6;
-    border: none;
-    border-radius: 23px;
-    width: 60px;
-    height: 60px;
-     box-shadow:  inset 0px -4px 2px rgba(220, 180, 80, 0.4),  
-    inset 0px 2px 2px rgba(255, 255, 255, 0.3),  
-    0px 4px 5px rgba(0, 0, 0, 0.15);   
 
-}
+    let tipo = '';
+    if (radioReceita.checked) {
+        tipo = 'receita';
+    } else if (radioDespesa.checked) {
+        tipo = 'despesa';
+    }
 
-.remover:hover {
-    transition: all 0.3s ease; 
-    transform: scale(1.1) rotate(-5deg);
-}
 
-.editar:hover {
-    
-    transition: all 0.3s ease;
-    transform: scale(1.2) rotate(5deg);
-}
+    const nomeTexto = nomeInput.value;
 
-.informacoes div {
-    
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    background: #FDF9F0;
-    border-radius: 16px;
-    width: 100%;
-    margin: 10px;
 
-    box-shadow:  inset 0px -6px 3px rgba(175, 171, 160, 0.4),
-    
-    1px 4px 5px rgba(0, 0, 0, 0.15);
-      
-}
-.informacoes  .despesas, .total, .lucro, .numTransacoes{
-    font-size: 23px;
-   
+    if (isNaN(valor) || valor <= 0 || !tipo || !nomeTexto || !data.value || !areaDatalist.value) {
+        alert('Por favor, preencha todos os campos corretamente!');
+        return;
+    }
+
+    if (data.value > new Date().toISOString().split('T')[0]) {
+        alert('A data não pode ser futura!');
+        return;
+    }
+
+    const transacao = {
+        valor: valor,
+        tipo: tipo,
+        nome: nomeTexto,
+        data: data.value.replace(/-/g, '/'),
+        area: areaDatalist.value
+    };
+
+    if (indiceEditando !== null) {
+        transacoes[indiceEditando] = transacao;
+        indiceEditando = null;
+    } else {
+        transacoes.push(transacao);
+    }
+    adicionarDataList()
+
+
+    entradaValor.value = '';
+    radioReceita.checked = false;
+    radioDespesa.checked = false;
+    nomeInput.value = '';
+    data.value = '';
+    areaDatalist.value = '';
+
+    renderizarLista();
+    atualizarResumo();
+
 }
 
-.informacoes .despesas{
-    color: #F95648;
+function removerTransacao(i) {
+    transacoes.splice(i, 1)
+    renderizarLista();
+    atualizarResumo()
+
 }
 
-.informacoes .lucro{
-    color: #629148;
-}
+function editarTransacao(i) {
+    const transacao = transacoes[i];
+    areaDatalist.value = transacao.area;
+    nomeInput.value = transacao.nome;
+    entradaValor.value = transacao.valor;
+    data.value = transacao.data.replace(/\//g, '-');
 
-.informacoes .total{
-    color: #F9A825;
-}
+    if (transacao.tipo === 'receita') {
+        radioReceita.checked = true;
+    } else {
+        radioDespesa.checked = true;
+    }
 
-.crud > * {
-    outline: none;
-    color:  #705429;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-    text-align: flex-start;
-    height: 50px;
-    width: 100%;
-    margin: 10px;
-    border: 1px solid rgba(249, 168, 37, 0.4);
-    border-radius: 20px;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
-}
-
-.adicionar {
-    height: 75px; 
-    font-weight: bold;
-    font-size: 20px;
-    color:#F9A825;
-    background: #FDEFC6;
-    border: none;
-    border-radius: 23px;
-   box-shadow:  inset 0px -4px 2px rgba(220, 180, 80, 0.4),  
-    inset 0px 2px 2px rgba(255, 255, 255, 0.3),  
-    0px 4px 5px rgba(0, 0, 0, 0.15);   
-}
-
-.adicionar:hover {
-    transition: all 0.3s ease;
-    transform: scale(1.1);
-}
-
-.tipo_dinheiro{
-    border:none;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-direction: column;
-    accent-color: #F9A825;
-    box-shadow: 0px 0px;
-    
-    
-}
-
-.data {
-    color: grey;
-}
-
- ::selection{
-    background: #F9A825;
-    color: white;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(35%) sepia(30%) saturate(800%) hue-rotate(355deg);
-    cursor: pointer;
-}
-
-.favos{
-    position: absolute;
-    left: 420px;
-    width: 70px;
-    transform: rotate(30deg)
-}
-
-h1 {
-    font-size: 60px;
+    indiceEditando = i;
 }
 
 
-button :active{
-  transform: scale(0.9);
-}
+
+
+btnAdicionar.addEventListener('click', adicionarTransacao);
+
+
+
+
+atualizarResumo();
