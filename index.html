@@ -2,6 +2,13 @@
 <html lang="en">
 
 <head>
+    <script src="main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
@@ -9,31 +16,83 @@
 </head>
 
 <body>
-    <div id="cabecalho" class="cabecalho">honey money</div>
+    <section id="cabecalho" class="cabecalho">
+        <h1>Honey Money</h1>
+        <img id="favos" class="favos" src="/favos.webp" alt="favos de mel">
+        <button id="graficos" class="graficos"><img style="width:50px; height : 50px;" src="/grafico-de-barras.png"
+                alt="grafico de barras"></button>
+    </section>
 
-    <div id="informacoes" class="informacoes">
-        <p class="lucro" id="lucro">12345</p>
-        <p id="despezas" class="despezas">4356</p>
-        <p id="total" class="total">234567890</p>
-    </div>
+    <section id="informacoes" class="informacoes">
+        <div>
+            <p>Receita</p>
+            <p class="lucro" id="lucro"></p>
+        </div>
+        <div>
+            <p>Despesas</p>
+            <p id="despesas" class="despesas"></p>
+        </div>
+        <div>
+            <p>Total</p>
+            <p id="total" class="total"></p>
+        </div>
+        <div>
+            <p>Número de transações</p>
+            <p id="numTransacoes" class="numTransacoes"></p>
+        </div>
 
-    <div id="crud" class="crud">
-        <input type="number" placeholder="Valor aqui" class="entrada" id="entrada">
-        <label>
-            <input type="radio" name="tipo" value="receita">
-            receita
-        </label>
-        <label>
-            <input type="radio" name="tipo" value="despeza">
-            despeza
-        </label>
-    </div>
+    </section>
 
-    <div id="lista" class="lista">dwqefgrh</div>
+    <section id="crud" class="crud">
 
-    <div id="botao" class="botao"> 
-        <button class="buttom" id="buttom">few</button>
-    </div>
+        <input list="opcoes-area" id="area" name="area" placeholder="Categoria">
+        <datalist id="opcoes-area">
+            <option value="lazer">
+            <option value="trabalho">
+            <option value="transporte">
+            <option value="saúde">
+            <option value="alimentação">
+        </datalist>
+        <input type="text" placeholder="Nome aqui..." class="nome" id="nome">
+        <input type="number" placeholder="Valor aqui..." class="entrada" id="entrada">
+
+        <div class="tipo_dinheiro" id="tipo_dinheiro">
+            <label>
+                <input type="radio" name="tipo" value="receita" id="tipo-receita" class="tipo-receita">
+                receita
+            </label>
+            <label>
+                <input type="radio" name="tipo" value="despesa" id="tipo-despesa" class="tipo-despesa">
+                despesa
+            </label>
+        </div>
+        <input type="date" id="data" class="data">
+
+        <button id="adicionar" class="adicionar">Adicionar</button>
+
+    </section>
+
+
+
+    <section id="lista" class="lista">
+        <h2>transações</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+            </tbody>
+        </table>
+
+
+    </section>
+
 </body>
 
 </html>
