@@ -1,86 +1,256 @@
-body {
+body{
+    color:  #705429;
     margin: 0;
-    min-height: 100vh;
-    min-width: 100vw;
+    padding: 10px;
+    height: 100vh;
+    background: #fceecf;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr 3fr; 
-    grid-template-areas: 
-    "cabecalho cabecalho cabecalho"
-    "informacoes informacoes informacoes"
-    "crud crud crud"
-    "lista lista botao"
-    ;
+    grid-template-rows: 100px 150px 150px 1fr;
+    grid-template-areas: "cabecalho "
+                         "informacoes"
+                         "crud "
+                         "lista";
     gap: 20px;
-    
-  
-}
+    font-family: "Nunito", sans-serif;
 
+   
+}
 
 .cabecalho {
+    color: #F6B313;
+    padding: 5px;
     grid-area: cabecalho;
-    background-color: yellow;
-    border: 1px solid black;
-}
-.informacoes{
- grid-area: informacoes;
-   border: 1px solid black;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-around;
-}
-
-.crud{
-    grid-area: crud;
-    border: 1px solid black;
-    padding: 20px;
-
-}
-
-.botao {
-    grid-area: "botao";
-      border: 1px solid black;
-      min-width: 20vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-}
-
-.lista {
-    grid-area: "lista";
-     border: 1px solid black;
-     min-width: 80vw;
-}
-
-p {
-    border-radius: 5px;
-    background-color: yellow;
-    width: 500px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    font-size: 35px;
+    
+     
 }
-
-.total {
-    width: 700px;
+h2 {
+   color: #F6B313; 
+   font-size: 30px;
 }
-
-.buttom {
-    background-color: yellow;
+.informacoes {
+    grid-area: informacoes;
+    display: flex;
+    justify-content: space-around;
+     padding: 10px;
+}
+.crud {
+    margin: 10px;
     border-radius: 16px;
-    width: 250px;
-    height: 250px;
-    font-size: 40px;
+    grid-area: crud;
+    
+    background: #FEF9EF;
+    box-shadow: inset 0px -6px 3px rgba(175, 171, 160, 0.4),
+    1px 4px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+}
+.lista {
+    margin: 5px;
+    border-radius: 16px;
+    grid-area: lista;
+    background: #FEF9EF;
+     padding: 20px;
+     box-shadow: inset 0px 6px 3px rgba(175, 171, 160, 0.4),
+    1px 4px 5px rgba(0, 0, 0, 0.15);
 }
 
-.entrada {
-    width: 800px;
-    height: 100px;
+.graficos {
+    border: none;
+    border-radius: 30px;
+    width: 80px;
+    height: 80px;
+     background: #FDEFC6;
+          box-shadow:  inset 0px -4px 2px rgba(220, 180, 80, 0.4), 
+    inset 0px 2px 2px rgba(255, 255, 255, 0.3), 
+    0px 4px 5px rgba(0, 0, 0, 0.15);  
+
+}
+
+.graficos:hover {
+    transition: all 0.3s ease;
+    transform: scale(1.2) rotate(5deg);
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    background-color: #FEFBF3;
+    box-shadow: 
+    inset 0px -5px 2px rgba(175, 171, 160, 0.4),
+    4px -4px 8px rgba(0, 0, 0, 0.1),
+    -4px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+}
+
+  td, th {
+    padding-top: 10px;
+    text-align: center;
+
+}
+
+
+tr {
+    border-bottom: 1px solid rgba(112, 84, 41, 0.5);
+    font-weight: bold;
+    
+    font-size: 18px;
+}
+tr:hover {
+    transition: all 0.3s ease;
+    background-color: #f8edd4; 
+}
+
+th{
+   background: #FEF4D9;
+}
+
+.remover {
+    width: 60px;
+    height: 60px;
+    background: #ffdada;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 
+    inset 0px -4px 2px rgba(230, 160, 160, 0.5), 
+    inset 0px 2px 2px rgba(255, 255, 255, 0.3),  
+    0px 4px 5px rgba(0, 0, 0, 0.15);    
+    
+}
+
+.editar{
+    margin: 10px;
+    background: #FDEFC6;
+    border: none;
+    border-radius: 23px;
+    width: 60px;
+    height: 60px;
+     box-shadow:  inset 0px -4px 2px rgba(220, 180, 80, 0.4),  
+    inset 0px 2px 2px rgba(255, 255, 255, 0.3),  
+    0px 4px 5px rgba(0, 0, 0, 0.15);   
+
+}
+
+.remover:hover {
+    transition: all 0.3s ease; 
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.editar:hover {
+    
+    transition: all 0.3s ease;
+    transform: scale(1.2) rotate(5deg);
+}
+
+.informacoes div {
+    
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background: #FDF9F0;
+    border-radius: 16px;
+    width: 100%;
+    margin: 10px;
+
+    box-shadow:  inset 0px -6px 3px rgba(175, 171, 160, 0.4),
+    
+    1px 4px 5px rgba(0, 0, 0, 0.15);
+      
+}
+.informacoes  .despesas, .total, .lucro, .numTransacoes{
+    font-size: 23px;
+   
+}
+
+.informacoes .despesas{
+    color: #F95648;
+}
+
+.informacoes .lucro{
+    color: #629148;
+}
+
+.informacoes .total{
+    color: #F9A825;
+}
+
+.crud > * {
+    outline: none;
+    color:  #705429;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: flex-start;
+    height: 50px;
+    width: 100%;
+    margin: 10px;
+    border: 1px solid rgba(249, 168, 37, 0.4);
     border-radius: 20px;
-    font-size: 40px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+}
+
+.adicionar {
+    height: 75px; 
+    font-weight: bold;
+    font-size: 20px;
+    color:#F9A825;
+    background: #FDEFC6;
+    border: none;
+    border-radius: 23px;
+   box-shadow:  inset 0px -4px 2px rgba(220, 180, 80, 0.4),  
+    inset 0px 2px 2px rgba(255, 255, 255, 0.3),  
+    0px 4px 5px rgba(0, 0, 0, 0.15);   
+}
+
+.adicionar:hover {
+    transition: all 0.3s ease;
+    transform: scale(1.1);
+}
+
+.tipo_dinheiro{
+    border:none;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: column;
+    accent-color: #F9A825;
+    box-shadow: 0px 0px;
+    
+    
+}
+
+.data {
+    color: grey;
+}
+
+ ::selection{
+    background: #F9A825;
+    color: white;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(35%) sepia(30%) saturate(800%) hue-rotate(355deg);
+    cursor: pointer;
+}
+
+.favos{
+    position: absolute;
+    left: 420px;
+    width: 70px;
+    transform: rotate(30deg)
+}
+
+h1 {
+    font-size: 60px;
 }
 
 
-
+button :active{
+  transform: scale(0.9);
+}
