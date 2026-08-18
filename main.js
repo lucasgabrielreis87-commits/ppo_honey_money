@@ -12,8 +12,14 @@ const displayNumTransacoes = document.getElementById('numTransacoes')
 const areaDatalist = document.getElementById('area')
 const dataList = document.getElementById('opcoes-area')
 
-let transacoes = [];
+
 let indiceEditando = null;
+let transacoes = JSON.parse(localStorage.getItem("transacoes")) || [];
+
+
+function salvarTransacoes() {
+    localStorage.setItem("transacoes", JSON.stringify(transacoes));
+}
 
 function atualizarResumo() {
     let receita = 0;
@@ -92,19 +98,13 @@ function renderizarLista() {
 
 function adicionarTransacao() {
     const valor = parseFloat(entradaValor.value);
-
-
     let tipo = '';
     if (radioReceita.checked) {
         tipo = 'receita';
     } else if (radioDespesa.checked) {
         tipo = 'despesa';
     }
-
-
     const nomeTexto = nomeInput.value;
-
-
     if (isNaN(valor) || valor <= 0 || !tipo || !nomeTexto || !data.value || !areaDatalist.value) {
         alert('Por favor, preencha todos os campos corretamente!');
         return;
@@ -114,7 +114,6 @@ function adicionarTransacao() {
         alert('A data não pode ser futura!');
         return;
     }
-
     const transacao = {
         valor: valor,
         tipo: tipo,
@@ -122,13 +121,13 @@ function adicionarTransacao() {
         data: data.value.replace(/-/g, '/'),
         area: areaDatalist.value
     };
-
     if (indiceEditando !== null) {
         transacoes[indiceEditando] = transacao;
         indiceEditando = null;
     } else {
-        transacoes.push(transacao);
+        transacoes.push(transacao); 
     }
+    salvarTransacoes();
     adicionarDataList()
 
 
@@ -146,6 +145,7 @@ function adicionarTransacao() {
 
 function removerTransacao(i) {
     transacoes.splice(i, 1)
+    salvarTransacoes();
     renderizarLista();
     atualizarResumo()
 
@@ -167,12 +167,13 @@ function editarTransacao(i) {
     indiceEditando = i;
 }
 
-
-
-
 btnAdicionar.addEventListener('click', adicionarTransacao);
 
+const btnGraficos = document.getElementById('graficos');
 
+btnGraficos.addEventListener('click', function() {
+    window.location.href = 'dashboards.html';
+});
 
-
+renderizarLista();
 atualizarResumo();
