@@ -2,6 +2,7 @@ body{
     color:  #705429;
     margin: 0;
     padding: 10px;
+    padding-bottom: 200px;
     height: 100vh;
     background: #fceecf;
     display: grid;
@@ -71,7 +72,7 @@ h2 {
 
 .graficos:hover {
     transition: all 0.3s ease;
-    transform: scale(1.2) rotate(5deg);
+    transform: scale(1.08);
 }
 
 
@@ -139,13 +140,13 @@ th{
 
 .remover:hover {
     transition: all 0.3s ease; 
-    transform: scale(1.1) rotate(-5deg);
+    transform: scale(1.1);
 }
 
 .editar:hover {
     
     transition: all 0.3s ease;
-    transform: scale(1.2) rotate(5deg);
+    transform: scale(1.2);
 }
 
 .informacoes div {
@@ -210,7 +211,7 @@ th{
 
 .adicionar:hover {
     transition: all 0.3s ease;
-    transform: scale(1.1);
+    transform: scale(1.06);
 }
 
 .tipo_dinheiro{
@@ -252,5 +253,10 @@ h1 {
 
 
 button :active{
-  transform: scale(0.9);
+  transform: scale(0.8);
+}
+
+.informacoes :hover{
+    transition: ease 0.5s;
+    transform: scale(1.05);
 }
