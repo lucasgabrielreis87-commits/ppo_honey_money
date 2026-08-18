@@ -1,0 +1,245 @@
+body {
+    color: #705429;
+    margin: 0;
+    padding: 10px;
+    padding-right: 60px;
+    padding-bottom: 40px;
+    min-height: 100vh;
+    background: #fceecf;
+    display: grid;
+    gap: 20px;
+    font-family: "Nunito", sans-serif;
+    grid-template-rows: 100px 150px 550px 550px 250px;
+    grid-template-columns: 65% 35%;
+    grid-template-areas: "cabecalho cabecalho "
+        "informacoes-base informacoes-base"
+        "despesasxreceitas categorias"
+        "evolucao-saldo evolucao-saldo"
+        "informacoes-plus informacoes-plus";
+}
+
+.cabecalho {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    grid-area: cabecalho;
+    color: #F6B313;
+    align-items: center;
+}
+
+.filtroPeriodo {
+    border-radius: 16px;
+    height: 60px;
+    width: 150px;
+    font-size: 18px;
+    outline: none;
+    color:  #705429;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: flex-start;
+    margin: 10px;
+    border: 1px solid rgba(249, 168, 37, 0.4);
+    border-radius: 20px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+}
+
+.voltar {
+    margin: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #F6B313;
+    border: none;
+    border-radius: 30px;
+    width: 100px;
+    height: 80px;
+    background: #FDEFC6;
+    box-shadow: inset 0px -4px 2px rgba(220, 180, 80, 0.4),
+        inset 0px 2px 2px rgba(255, 255, 255, 0.3),
+        0px 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.voltar:hover {
+    transition: all 0.3s ease;
+    transform: scale(1.08);
+}
+
+.informacoes-base {
+    display: flex;
+    grid-area: informacoes-base;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.informacoes-base div {
+
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background: #FDF9F0;
+    border-radius: 16px;
+    width: 100%;
+    margin: 10px;
+
+    box-shadow: inset 0px -6px 3px rgba(175, 171, 160, 0.4),
+
+        1px 4px 5px rgba(0, 0, 0, 0.15);
+
+}
+
+.informacoes-base .despesas,
+.total,
+.receita,
+.numTransacoes {
+    font-size: 23px;
+
+}
+
+.despesasxreceitas {
+    padding: 20px;
+    grid-area: despesasxreceitas;
+    border-radius: 16px;
+    background: #FDF9F0;
+    box-shadow: inset 0px -6px 3px rgba(175, 171, 160, 0.4),
+        1px 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.categorias {
+    height: 490px;
+    padding: 20px;
+    padding-bottom: 40px;
+    grid-area: categorias;
+    border-radius: 16px;
+    background: #FDF9F0;
+    box-shadow: inset 0px -6px 3px rgba(175, 171, 160, 0.4),
+        1px 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.evolucao-saldo {
+    padding: 20px;
+    grid-area: evolucao-saldo;
+    background: #FDF9F0;
+    border-radius: 16px;
+    box-shadow: inset 0px -6px 3px rgba(175, 171, 160, 0.4),
+        1px 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.informacoes-plus {
+    
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    grid-area: informacoes-plus;
+}
+
+.favos {
+    position: absolute;
+    left: 420px;
+    width: 70px;
+    transform: rotate(30deg)
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    color: #F6B313;
+    margin: 0px;
+}
+
+.informacoes-plus div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+     font-size: 18px;
+    font-weight: bold;
+    background: #FDF9F0;
+    border-radius: 16px;
+    width: 100%;
+    margin: 10px;
+    height: 100%;
+    box-shadow: inset 0px -6px 3px rgba(175, 171, 160, 0.4),
+
+        1px 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+.informacoes-base .despesas{
+    color: #F95648;
+}
+
+.informacoes-base .receita{
+    color: #629148;
+}
+
+.informacoes-base .total{
+    color: #F9A825;
+}
+
+#maiorReceita {
+    display: flex;
+    text-align: center;
+    font-size: 23px;
+    color: #629148;
+}
+
+#maiorDespesa {
+     display: flex;
+    text-align: center;
+    font-size: 23px;
+    color: #F95648;
+}
+
+#maiorCategoria {
+     display: flex;
+    text-align: center;
+    font-size: 23px;
+    color: #F95648;
+}
+
+#mediaGastos {
+    display: flex;
+    text-align: center;
+    font-size: 23px;
+    color: #F9A825;
+}
+
+#diferencaMes {
+    display: flex;
+    text-align: center;
+    font-size: 23px;
+}
+
+
+.informacoes-plus div p {
+    font-weight:bolder;
+}
+
+
+
+.canvas-categorias {
+    height: 200px;
+}
+
+ ::selection{
+    background: #F9A825;
+    color: white;
+}
+
+button :active{
+  transform: scale(0.8);
+}
+
+.informacoes-base :hover{
+    transition: ease 0.5s;
+    transform: scale(1.05);
+}
+
+.informacoes-plus :hover{
+    transition: ease 0.5s;
+    transform: scale(1.05);
+}

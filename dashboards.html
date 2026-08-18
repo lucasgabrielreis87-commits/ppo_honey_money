@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboards.js" defer></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="dashboards.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboards</title>
+</head>
+
+<body>
+    <header id="cabecalho" class="cabecalho">
+        <h1>Honey Money</h1>
+        <img src="/favos.webp" alt="favos de mel" id="favos" class="favos">
+        <div>
+            <select id="filtroPeriodo" class="filtroPeriodo">
+                <option value="" disabled selected>Filtro</option>
+                <option value="tudo">Tudo</option>
+                <option value="mes">Este mês</option>
+                <option value="mesAnterior">Mês anterior</option>
+                <option value="ano">Este ano</option>
+            </select>
+            <button id="voltar" class="voltar"> ← Voltar</button>
+        </div>
+    </header>
+
+    <section id="informacoes-base" class="informacoes-base">
+        <div>
+            <p>Receita</p>
+            <p class="receita" id="receita"></p>
+        </div>
+        <div>
+            <p>Despesas</p>
+            <p id="despesas" class="despesas"></p>
+        </div>
+        <div>
+            <p>Total</p>
+            <p id="total" class="total"></p>
+        </div>
+        <div>
+            <p>Número de transações</p>
+            <p id="numTransacoes" class="numTransacoes"></p>
+        </div>
+    </section>
+    <section id="despesasxreceitas" class="despesasxreceitas">
+        <h2>Despesas x Receitas ao longo do tempo</h2>
+        <canvas id="canvas-despesasxreceitas" class="canvas-"></canvas>
+    </section>
+    <section id="categorias" class="categorias">
+        <h2>Despesas por categoria</h2>
+        <canvas id="canvas-categorias" class="canvas-categorias"></canvas>
+    </section>
+    <section id="evolucao-saldo" class="evolucao-saldo">
+        <h2>Total ao longo dos meses</h2>
+        <canvas id="canvas-evolucao-saldo" class="canvas-evolucao-saldo"></canvas>
+    </section>
+    <section id="informacoes-plus" class="informacoes-plus">
+        <div>
+            <p>Diferença com o mês anterior</p>
+             <p id="diferencaMes"></p>
+        </div>
+        <div>
+            <p>Categoria que mais gastou</p>
+            <p id="maiorCategoria"></p>
+        </div>
+        <div>
+            <p>Maior receita</p>
+            <p id="maiorReceita"></p>
+        </div>
+        <div>
+            <p>Maior despesa</p>
+            <p id="maiorDespesa"></p>
+        </div>
+        <div>
+            <p>Media de gastos diários</p>
+            <p id="mediaGastos"></p>
+        </div>
+    </section>
+
+
+
+</body>
+
+</html>
